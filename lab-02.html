@@ -383,14 +383,22 @@ plastic_data_all %&gt;% head(n = 10)</code></pre>
 ##  9 Bangladesh          BGD                6.27 
 ## 10 Barbados            BRB                3.04</code></pre>
 <pre class="r"><code># Member 4 (pair 2) write code to load File 2 data here:
-
-
+data2 &lt;- read_csv2(&quot;data/per-capita-ocean-plastic-waste.txt&quot;)
+plastic_data_all &lt;- data2 %&gt;%
+  select(-name) %&gt;%
+  left_join(plastic_data_all, by = &quot;code&quot;)
 
 # Member 1 (pair 1) write code to load File 3 data here:
+data3 &lt;- read_tsv(&quot;data/UN_country_population.tsv&quot;)
+plastic_data_all &lt;- data3 %&gt;%
+  select(-name) %&gt;%
+  right_join(plastic_data_all, by = &quot;code&quot;)
 
-
-
-# Member 3 (pair 2) write code to load File 4 data here:</code></pre>
+# Member 3 (pair 2) write code to load File 4 data here:
+data4 &lt;- read_excel(&quot;data/UN_country_region.xlsx&quot;)
+plastic_data_all &lt;- data4 %&gt;%
+  select(-name) %&gt;%
+  right_join(plastic_data_all, by = &quot;code&quot;)</code></pre>
 <pre class="r"><code># Member 2 (pair 1) write code to create object &#39;plastic_data_all&#39;:
 
 
@@ -413,7 +421,18 @@ plastic_data_all %&gt;% head(n = 10)</code></pre>
 <h2>Exercises</h2>
 <div id="ex-1." class="section level3">
 <h3>Ex 1.</h3>
-<pre class="r"><code># Write your code here to answer exercise 1</code></pre>
+<pre class="r"><code># Write your code here to answer exercise 1
+plastic_data_all%&gt;%
+  count(region,sort=TRUE)</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##   region                              n
+##   &lt;chr&gt;                           &lt;int&gt;
+## 1 Africa                             43
+## 2 Asia                               39
+## 3 Latin America and The Caribbean    34
+## 4 Europe                             31
+## 5 Oceania                            10
+## 6 North America                       2</code></pre>
 </div>
 <div id="ex-2." class="section level3">
 <h3>Ex 2.</h3>
